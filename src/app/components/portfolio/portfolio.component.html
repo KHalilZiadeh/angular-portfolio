@@ -1,0 +1,45 @@
+<mat-toolbar class="sticky-top">
+  <p class="m-0">KHalil Ziadeh</p>
+  <div id="icon"
+       (click)="drawer.toggle()">
+    <i #plus
+       class="fa-solid fa-minus"></i>
+    <i class="fa-solid fa-minus"></i>
+  </div>
+</mat-toolbar>
+<mat-drawer-container>
+  <mat-tab-group>
+    <mat-tab label="Me"></mat-tab>
+    <mat-tab label="Features"></mat-tab>
+    <mat-tab label="Code"></mat-tab>
+  </mat-tab-group>
+  <mat-drawer #drawer
+              [position]="'end'"
+              autoFocus="none"
+              (openedStart)="rotate()"
+              (closedStart)="rotate()">
+    <div id="social-links"
+         class="w-75">
+      <a class="text-light"
+         href="https://github.com/KHalilZiadeh"><i class="fa-brands fa-github"></i>
+        <p>GitHub</p>
+      </a>
+      <a class="ms-2 text-light"
+         href="https://www.linkedin.com/in/khalil-ziadeh/"><i class="fa-brands fa-linkedin"></i>
+        <p>LinkedIn</p>
+      </a>
+      <a class="ms-2 text-light"
+         href="https://www.facebook.com/khalil.ziadeh.98"><i class="fa-brands fa-facebook"></i>
+        <p>Facbook</p>
+      </a>
+      <a class="ms-2 text-light"
+         href="https://codepen.io/KHalilZiadeh"><i class="fa-brands fa-codepen"></i>
+        <p>CodePen</p>
+      </a>
+      <a class="ms-2 text-light"
+         href="https://www.instagram.com/kdehzial/"><i class="fa-brands fa-instagram"></i>
+        <p>Instagram</p>
+      </a>
+    </div>
+  </mat-drawer>
+</mat-drawer-container>

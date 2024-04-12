@@ -1,0 +1,65 @@
+  @import '../../shared/styling/functions.scss';
+
+  mat-toolbar {
+    @include flex(center, space-between);
+    color: #69f0ae;
+
+    #icon {
+      position: relative;
+      width: 40px;
+      height: 40px;
+
+      i {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        translate: -50% -50%;
+
+        &:first-child {
+          rotate: 90deg;
+          transition: all 0.4s linear;
+        }
+
+        &:first-child.rotate {
+          rotate: -360deg;
+        }
+      }
+    }
+  }
+
+  mat-drawer-container {
+    height: 100svh;
+
+    ::ng-deep .mat-tab-label {
+      width: calc(100vw / 3);
+    }
+
+    mat-drawer {
+      ::ng-deep .mat-drawer-inner-container {
+        padding: 1rem 1rem 0;
+        max-width: calc(100vw * 2 / 3);
+        @include flex(center, start, column);
+
+        #social-links {
+          @include flex(center, space-between);
+          flex-wrap: wrap;
+
+          a {
+            text-decoration: none;
+            font-size: 1.75rem;
+            @include flex(center, space-between, column);
+            margin-bottom: 0.75rem;
+
+            i {
+              margin-bottom: 0.5rem;
+            }
+
+            p {
+              margin: 0;
+              font-size: 1rem;
+            }
+          }
+        }
+      }
+    }
+  }
