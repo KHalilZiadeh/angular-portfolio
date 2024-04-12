@@ -47,7 +47,8 @@
     mat-drawer {
       ::ng-deep .mat-drawer-inner-container {
         padding: 1rem 1rem 0;
-        max-width: calc(200vw * 3);
+        width: calc(200vw / 3);
+        max-width: calc(200vw / 3);
         @include flex(center, start, column);
 
         #social-links {
