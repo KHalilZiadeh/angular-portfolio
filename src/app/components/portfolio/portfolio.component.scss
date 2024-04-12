@@ -30,14 +30,24 @@
   mat-drawer-container {
     height: 100svh;
 
-    ::ng-deep .mat-tab-label {
-      width: calc(100vw / 3);
+    mat-tab-group {
+      ::ng-deep .mat-tab-header {
+        width: 100%;
+
+        button {
+          display: none;
+        }
+      }
+
+      ::ng-deep .mat-tab-label {
+        width: calc(100vw / 3);
+      }
     }
 
     mat-drawer {
       ::ng-deep .mat-drawer-inner-container {
         padding: 1rem 1rem 0;
-        max-width: calc(100vw * 2 / 3);
+        max-width: calc(200vw * 3);
         @include flex(center, start, column);
 
         #social-links {
