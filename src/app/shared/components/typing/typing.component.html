@@ -1,0 +1,90 @@
+<div class="d-flex flex-column align-items-center justify-content-center pt-3">
+  <p class="h1">{{title}}</p>
+  <section class="mb-3">
+    <span #content
+          class="fst-italic"
+          id="content"></span>
+    <span #cursor
+          id="blink"></span>
+  </section>
+  <section id="content-control">
+    <mat-grid-list cols="2"
+                   rowHeight="80px">
+      <form id="the-form"
+            [formGroup]="typingControls">
+        <mat-grid-tile [colspan]="1"
+                       [rowspan]="1">
+          <mat-form-field appearance="outline"
+                          color="accent">
+            <mat-label>Enter a sentance</mat-label>
+            <input matInput
+                   formControlName="sentsIn">
+            <mat-hint>max 22 letters</mat-hint>
+          </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile [colspan]="1"
+                       [rowspan]="1">
+          <mat-form-field color="accent"
+                          appearance="outline">
+            <mat-label>
+              Select font-size
+            </mat-label>
+            <input type="number"
+                   formControlName="fontSIn"
+                   matInput
+                   [attr.value]="fontSize"
+                   min="12"
+                   max="39">
+          </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile [colspan]="1"
+                       [rowspan]="1">
+          <mat-form-field appearance="outline"
+                          color="accent">
+            <mat-label>Slect target</mat-label>
+            <mat-select [(value)]="selectedColor"
+                        (selectionChange)="selectedColor=$event.value"
+                        formControlName="colorSl">
+              <mat-option value="both">both</mat-option>
+              <mat-option value="font">font</mat-option>
+              <mat-option value="underline">underline</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile class="color"
+                       [colspan]="1"
+                       [rowspan]="1">
+          <mat-label class="me-3">Select a color</mat-label>
+          <input type="color"
+                 matInput
+                 formControlName="colorIn">
+        </mat-grid-tile>
+        <mat-grid-tile [colspan]="1"
+                       [rowspan]="1">
+          <mat-form-field appearance="outline"
+                          color="accent">
+            <mat-label>Select speed</mat-label>
+            <mat-select [(value)]="selectedSpeed"
+                        (selectionChange)="selectedSpeed=$event.value"
+                        formControlName="speedSl">
+              <mat-option value="both">both</mat-option>
+              <mat-option value="typing">typing</mat-option>
+              <mat-option value="deleting">deleting</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile [colspan]="1"
+                       [rowspan]="1">
+          <div class="d-flex flex-column align-items-start w-100 px-2">
+            <mat-label>Speed</mat-label>
+            <mat-slider class="w-100"
+                        [min]="50"
+                        [max]="1000"
+                        [thumbLabel]="true"
+                        formControlName="speedIn"></mat-slider>
+          </div>
+        </mat-grid-tile>
+      </form>
+    </mat-grid-list>
+  </section>
+</div>
