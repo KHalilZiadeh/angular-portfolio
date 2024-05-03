@@ -17,6 +17,7 @@
 | feature | description | status |
 | :--- | :----: | ---: |
 | social media | Add social media accounts | Done |
-| Me | typer | in progress |
-| Me | ? | future |
+| Me | typer | Done |
+| Me | add controls | Done |
+| Me | add personal card | in progress |
 
