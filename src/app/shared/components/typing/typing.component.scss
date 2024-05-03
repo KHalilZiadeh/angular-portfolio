@@ -1,0 +1,28 @@
+#blink {
+  border-right-style: solid;
+}
+
+.blink {
+  animation: blink 0.3s infinite;
+}
+
+#the-form {
+  width: 100vw;
+  height: 300px;
+  padding: 0.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+
+  input.mat-input-element {
+    width: 50%;
+  }
+}
+
+@keyframes blink {
+
+  to {
+    opacity: 0;
+  }
+}

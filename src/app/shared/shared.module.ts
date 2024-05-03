@@ -1,7 +1,8 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MaterialModule } from './material/material.module';
 import { TypingComponent } from './components/typing/typing.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -10,11 +11,11 @@ import { TypingComponent } from './components/typing/typing.component';
     TypingComponent
   ],
   imports: [
-    CommonModule, MaterialModule
+    CommonModule, MaterialModule, ReactiveFormsModule
   ],
   exports: [
     MaterialModule,
-    TypingComponent
+    TypingComponent,
   ]
 })
 export class SharedModule { }

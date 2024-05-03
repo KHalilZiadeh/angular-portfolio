@@ -1,8 +1,60 @@
-<div class="typing">
-  <h3>{{title}}</h3>
-  <section>
+<div class="d-flex flex-column align-items-center justify-content-center pt-3">
+  <p class="h1">{{title}}</p>
+  <section class="mb-3">
     <span #content
+          class="fst-italic"
           id="content"></span>
-    <span id="blink"></span>
+    <span #cursor
+          id="blink"></span>
+  </section>
+  <section id="content-control">
+    <form id="the-form"
+          [formGroup]="typingControls">
+      <mat-form-field appearance="outline"
+                      color="accent">
+        <mat-label>Enter a sentance</mat-label>
+        <input matInput
+               formControlName="sentsIn">
+        <mat-hint>max 10 letters</mat-hint>
+      </mat-form-field>
+      <mat-form-field color="accent"
+                      appearance="outline">
+        <mat-label>
+          Select font-size
+        </mat-label>
+        <input type="number"
+               formControlName="fontSIn"
+               matInput
+               min="5"
+               max="50">
+      </mat-form-field>
+      <mat-form-field appearance="outline"
+                      color="accent">
+        <mat-label>Slect target</mat-label>
+        <mat-select [(value)]="selectedColor"
+                    (selectionChange)="selectedColor=$event.value"
+                    formControlName="colorSl">
+          <mat-option value="both">both</mat-option>
+          <mat-option value="font">font</mat-option>
+          <mat-option value="underline">underline</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <input type="color"
+             matInput
+             formControlName="colorIn">
+      <mat-form-field appearance="outline"
+                      color="accent">
+        <mat-label>Select speed</mat-label>
+        <mat-select [(value)]="selectedSpeed"
+                    (selectionChange)="selectedSpeed=$event.value"
+                    formControlName="speedSl">
+          <mat-option value="both">both</mat-option>
+          <mat-option value="typing">typing</mat-option>
+          <mat-option value="deleting">deleting</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-label>speed</mat-label>
+      <mat-slider formControlName="speedIn"></mat-slider>
+    </form>
   </section>
 </div>
