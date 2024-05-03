@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, ElementRef, Input, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { BehaviorSubject, combineLatest, debounce, debounceTime, delay, fromEvent, interval, merge, mergeMap, of, switchMap } from 'rxjs';
+import { BehaviorSubject, combineLatest, debounce, debounceTime, delay, fromEvent, interval, map, merge, mergeMap, of, switchMap } from 'rxjs';
 import 'vanilla-colorful';
 
 @Component({
@@ -13,9 +13,8 @@ export class TypingComponent implements OnInit {
   @ViewChild('content', { static: false }) content!: ElementRef;
   @ViewChild('cursor', { static: false }) cursor!: ElementRef;
 
-  textColor = "#FFFFFF";
   underlineColor = 'white';
-  fontSize = "20px";
+  fontSize = "20";
   blinkWidth = "2px";
 
   title: string = 'What I Can Do';
@@ -32,6 +31,8 @@ export class TypingComponent implements OnInit {
 
   clrSl$;
   clrIn$;
+  spdSl$;
+  spdIn$;
 
   private ind: number = 0;
 
@@ -46,16 +47,16 @@ export class TypingComponent implements OnInit {
     });
     this.clrSl$ = new BehaviorSubject(this.typingControls.controls['colorSl'].value);
     this.clrIn$ = new BehaviorSubject(this.typingControls.controls['colorIn'].value);
+    this.spdSl$ = new BehaviorSubject(this.typingControls.controls['speedSl'].value);
+    this.spdIn$ = new BehaviorSubject(this.typingControls.controls['speedIn'].value);
   }
 
   ngOnInit(): void {
-
     this.typingControls.controls['sentsIn'].valueChanges.subscribe(string => this.sentences = string);
-    this.typingControls.controls['fontSIn'].valueChanges.subscribe(val => console.log(val));
     this.typingControls.controls['colorSl'].valueChanges.subscribe(clrSl => this.clrSl$.next(clrSl));
     this.typingControls.controls['colorIn'].valueChanges.subscribe(clrIn => this.clrIn$.next(clrIn));
-    this.typingControls.controls['speedSl'].valueChanges.subscribe(val => console.log(val));
-    this.typingControls.controls['speedIn'].valueChanges.subscribe(val => console.log(val));
+    this.typingControls.controls['speedSl'].valueChanges.subscribe(spdSl => this.spdSl$.next(spdSl));
+    this.typingControls.controls['speedIn'].valueChanges.subscribe(spdIn => this.spdIn$.next(spdIn));
   }
 
   ngAfterViewInit(): void {
@@ -84,15 +85,39 @@ export class TypingComponent implements OnInit {
         `2px solid ${this.underlineColor}`
       );
     });
+    combineLatest([this.spdSl$, this.spdIn$]).subscribe(opts => {
+      switch (opts[0]) {
+        case 'typing':
+          this.typingSpeed = opts[1];
+          break;
+        case 'delete':
+          this.deleteSpeed = opts[1];
+          break;
+        default:
+          this.typingSpeed = this.deleteSpeed = opts[1];
+          break;
+      }
+    });
+
+    this.typingControls.controls['fontSIn'].valueChanges.pipe(
+      map(size => size < 16 ? 16 : size > 39 ? 39 : size)
+    ).subscribe(size => {
+      this.fontSize = size;
+      this.renderer.setStyle(
+        this.content.nativeElement,
+        "font-size",
+        `${size}px`
+      );
+    });
   }
 
   initVariables() {
     this.renderer.setStyle(
       this.content.nativeElement,
-      "font-size",
-      this.fontSize
-    );
+      "font-size", `${this.fontSize}px`);
+
     this.renderer.setStyle(this.content.nativeElement, "padding", "0.1em");
+
 
     this.renderer.setStyle(
       this.cursor.nativeElement,
@@ -102,7 +127,7 @@ export class TypingComponent implements OnInit {
     this.renderer.setStyle(
       this.cursor.nativeElement,
       "border-right-color",
-      this.textColor
+      this.fontColor
     );
     this.renderer.setStyle(
       this.cursor.nativeElement,
